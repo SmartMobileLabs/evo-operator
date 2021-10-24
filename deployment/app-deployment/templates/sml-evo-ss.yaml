@@ -1,0 +1,51 @@
+# Copyright 2020 Nokia
+# Licensed under the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sml-evo
+  labels:
+    ndac.appfw.private-network-access: private-network-for-sml-evo
+spec:
+  selector:
+    matchLabels:
+      app: sml-evo
+  updateStrategy:
+    type: RollingUpdate
+  serviceName: sml-evo
+  replicas: {{.Values.replicaCount}}
+  template:
+    metadata:
+      labels:
+        app: sml-evo
+        statusCheck: "true"
+    spec:
+      imagePullSecrets:
+      - name: dacsecret
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: evo-persvol
+          persistentVolumeClaim:
+            claimName: storage-persvol-1
+      containers:
+        - name: orchestrator
+          image: smartmobilelabs/dummy:evo1
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 750m
+              memory: 2Gi
+          ports:
+            - containerPort: {{.Values.service.uiport}}
+              name: ui-port
+            - containerPort: {{.Values.service.udpportrangelow}}
+              name: portrangemin
+            - containerPort: {{.Values.service.udpportrangehigh}}
+              name: portrangemax
+          volumeMounts:
+            - mountPath: /persvol
+              name: evo-persvol

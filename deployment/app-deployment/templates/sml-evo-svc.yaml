@@ -1,0 +1,19 @@
+# Copyright 2020 Nokia
+# Licensed under the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sml-evo-service
+  labels:
+    name: sml-evo
+    deleteOnLicenceExpiration: "true"
+spec:
+  type: NodePort
+  ports:
+    - port: {{ .Values.service.uiport }}
+      targetPort: {{ .Values.service.uiport }}
+  selector:
+    app: sml-evo
+

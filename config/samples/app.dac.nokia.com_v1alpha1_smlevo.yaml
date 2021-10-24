@@ -1,0 +1,12 @@
+apiVersion: app.dac.nokia.com.example.com/v1alpha1
+kind: SmlEvo
+metadata:
+  name: sml-evo-1
+spec:
+  # Add fields here
+  metricsDomainName: sml-evo.192.168.50.10.nip.io
+  ports:
+    udpPortHigh: 11000
+    udpPortLow: 10000
+    uiPort: 9000
+  replicaCount: 1

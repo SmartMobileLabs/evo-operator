@@ -1,0 +1,20 @@
+# permissions for end users to view smlevoes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: smlevo-viewer-role
+rules:
+- apiGroups:
+  - app.dac.nokia.com.example.com
+  resources:
+  - smlevoes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - app.dac.nokia.com.example.com
+  resources:
+  - smlevoes/status
+  verbs:
+  - get
