@@ -1,4 +1,4 @@
- export VERSION=0.0.0.48
+ export VERSION=0.0.0.49
  microk8s kubectl delete -f config/samples/app.dac.nokia.com_v1alpha1_smlevo.yaml -n sml-evo
  make docker-build  docker-push
  make deploy
