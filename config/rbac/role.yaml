@@ -51,3 +51,15 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - ops.dac.nokia.com
+  resources:
+  - licenceexpireds
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch

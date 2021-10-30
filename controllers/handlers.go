@@ -180,12 +180,24 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 		logger.Error(err, "status applied resources and previous spec update failed")
 	}
 
+	if instance.Spec.PrivateNetworkAccess != nil {
+		instance.Status.AppReportedData.PrivateNetworkIpAddress = getPrivateNetworkIpAddresses(
+			namespace,
+			"private-network-for-sml-evo",
+			[]deploymentId{
+				{deploymentTypeStatefulset, "sml-evo"},
+			},
+		)
+		for k := range instance.Status.AppReportedData.PrivateNetworkIpAddress {
+			logger.Info("ip address assigned = %s", instance.Status.AppReportedData.PrivateNetworkIpAddress[k])
+		}
+	}
 	//Controls the appStatus and appReportedData in the app spec CR, running continuously in the background
 	appStatusMonitor = monitoring.NewMonitor(r.Client, instance, namespace,
 		func() {
 			logger.Info("Set AppReportedData")
 			//runningCallback - example, some dynamic data should be reported here which has value only after the deployment
-			svc, err := kubelib.GetKubeAPI().CoreV1().Services(namespace).Get(context.TODO(), "consul-operator-metrics", metav1.GetOptions{})
+			svc, err := kubelib.GetKubeAPI().CoreV1().Services(namespace).Get(context.TODO(), "sml-evo-operator-metrics", metav1.GetOptions{})
 			if err != nil {
 				logger.Error(err, "Failed to read the svc of the metrics endpoint")
 				return
@@ -194,11 +206,12 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 			if instance.Spec.PrivateNetworkAccess != nil {
 				instance.Status.AppReportedData.PrivateNetworkIpAddress = getPrivateNetworkIpAddresses(
 					namespace,
-					"private-network-for-consul",
+					"private-network-for-sml-evo",
 					[]deploymentId{
-						{deploymentTypeStatefulset, "example-consul"},
+						{deploymentTypeStatefulset, "sml-evo-1"},
 					},
 				)
+				logger.Info("ip address assigned = %s", instance.Status.AppReportedData.PrivateNetworkIpAddress)
 			}
 
 			if err := r.Client.Status().Update(context.TODO(), instance); nil != err {

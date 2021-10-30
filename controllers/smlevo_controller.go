@@ -28,7 +28,7 @@ import (
 	app "smartmobilelabs.com/evo/evo-operator/api/v1alpha1"
 )
 
-var log = logf.Log.WithName("controller_consul")
+var log = logf.Log.WithName("controller_sml-evo")
 
 // SmlEvoReconciler reconciles a SmlEvo object
 type SmlEvoReconciler struct {
@@ -36,6 +36,7 @@ type SmlEvoReconciler struct {
 	Scheme *runtime.Scheme
 }
 
+//+kubebuilder:rbac:groups=ops.dac.nokia.com,resources=licenceexpireds,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=app.dac.nokia.com.example.com,resources=smlevoes,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=app.dac.nokia.com.example.com,resources=smlevoes/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=app.dac.nokia.com.example.com,resources=smlevoes/finalizers,verbs=update

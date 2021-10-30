@@ -74,7 +74,7 @@ spec:
             - replicaCount
             type: object
           status:
-            description: ConsulStatus defines the observed state of Consul
+            description: SmlEvoStatus defines the observed state of SmlEvo
             properties:
               appReportedData:
                 properties:

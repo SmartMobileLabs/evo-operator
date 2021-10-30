@@ -43,7 +43,7 @@ type AppReporteData struct {
 	PrivateNetworkIpAddress map[string]string `json:"privateNetworkIpAddresses,omitempty"`
 }
 
-// ConsulStatus defines the observed state of Consul
+// SmlEvoStatus defines the observed state of SmlEvo
 type SmlEvoStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
