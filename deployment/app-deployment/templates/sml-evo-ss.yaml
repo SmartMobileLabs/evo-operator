@@ -33,7 +33,7 @@ spec:
             claimName: storage-persvol-1
       containers:
         - name: orchestrator
-          image: smartmobilelabs/dummy:evo1
+          image: smartmobilelabs/evo:117_default
           imagePullPolicy: IfNotPresent
           resources:
             limits:
