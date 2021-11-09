@@ -44,5 +44,8 @@ elif [[ "$FOO" == *"logs"* ]]; then
     microk8s kubectl logs -f --namespace sml-evo-system $(microk8s kubectl get pods --namespace sml-evo-system |  grep sml-evo- | awk '{print $1}') manager
 	echo dont know how to $FOO
 	exit 1
+else 
+	echo do not know how to $FOO
+	exit 1
 fi
 
