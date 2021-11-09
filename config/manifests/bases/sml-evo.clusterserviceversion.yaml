@@ -1,0 +1,45 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: sml-evo.v0.0.0
+  namespace: sml-evo-system
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: SmlEvo is the Schema for the smlevoes API
+      displayName: Sml Evo
+      kind: SmlEvo
+      name: smlevos.app.dac.nokia.com.example.com
+      version: v1alpha1
+  description: sml-evo
+  displayName: sml-evo
+  icon:
+  - base64data: iVBORw0KGgoAAAANSUhEUgAAADEAAAA1CAYAAADoDQMKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAT
+    mediatype: image/png
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: true
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - foo
+  - bar
+  links:
+  - name: Sml Evo
+    url: https://sml-evo.domain
+  maturity: alpha
+  provider:
+    name: sml-evo
+  version: 0.0.0
