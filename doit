@@ -5,6 +5,7 @@ if [ -z "%FOO" ]; then
 	exit 1
 fi
 if [[ "$FOO" == *"uninstall"* ]]; then 
+    ./doit down
     microk8s kubectl delete -f og.yaml -n sml-evo-system
     microk8s kubectl delete serviceaccount sml-evo-controller-manager -n sml-evo-system
     microk8s kubectl delete -f additionals/og.yaml -n sml-evo-system
@@ -41,4 +42,7 @@ elif [[ "$FOO" == *"down"* ]]; then
 	microk8s kubectl delete -f config/samples/app.dac.nokia.com_v1alpha1_smlevo.yaml  -n sml-evo
 elif [[ "$FOO" == *"logs"* ]]; then
     microk8s kubectl logs -f --namespace sml-evo-system $(microk8s kubectl get pods --namespace sml-evo-system |  grep sml-evo- | awk '{print $1}') manager
+	echo dont know how to $FOO
+	exit 1
 fi
+

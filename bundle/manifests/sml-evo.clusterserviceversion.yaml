@@ -1,0 +1,237 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "app.dac.nokia.com.example.com/v1alpha1",
+          "kind": "SmlEvo",
+          "metadata": {
+            "name": "sml-evo-1"
+          },
+          "spec": {
+            "metricsDomainName": "sml-evo.192.168.50.10.nip.io",
+            "ports": {
+              "udpPortHigh": 11000,
+              "udpPortLow": 10000,
+              "uiPort": 9000
+            },
+            "privateNetworkAccess": {
+              "additionalRoutes": [
+                "10.30.1.0/28",
+                "10.40.1.0/28"
+              ],
+              "apnUUID": "apn:169dfa4d-bc39-444b-7feb-b236909802d8",
+              "customerNetwork": "10.32.1.0/28"
+            },
+            "replicaCount": 1
+          }
+        }
+      ]
+    capabilities: Basic Install
+    operators.operatorframework.io/builder: operator-sdk-v1.12.0
+    operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
+  name: sml-evo.v0.0.71
+  namespace: sml-evo-system
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - kind: SmlEvo
+      name: smlevoes.app.dac.nokia.com.example.com
+      version: v1alpha1
+      description: sml-evo
+      displayName: sml-evo
+  description: sml-evo
+  displayName: sml-evo
+  icon:
+  - base64data: iVBORw0KGgoAAAANSUhEUgAAADEAAAA1CAYAAADoDQMKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAT
+    mediatype: image/png
+  install:
+    spec:
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - ""
+          - apps
+          resources:
+          - configmaps
+          - endpoints
+          - persistentvolumeclaims
+          - pods
+          - secrets
+          - services
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - app.dac.nokia.com.example.com
+          resources:
+          - smlevoes
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - app.dac.nokia.com.example.com
+          resources:
+          - smlevoes/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - app.dac.nokia.com.example.com
+          resources:
+          - smlevoes/status
+          verbs:
+          - get
+          - patch
+          - update
+        - apiGroups:
+          - ops.dac.nokia.com
+          resources:
+          - licenceexpireds
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - authentication.k8s.io
+          resources:
+          - tokenreviews
+          verbs:
+          - create
+        - apiGroups:
+          - authorization.k8s.io
+          resources:
+          - subjectaccessreviews
+          verbs:
+          - create
+        serviceAccountName: sml-evo-controller-manager
+      deployments:
+      - name: sml-evo-controller-manager
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              control-plane: controller-manager
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                control-plane: controller-manager
+            spec:
+              containers:
+              - args:
+                - --secure-listen-address=0.0.0.0:8443
+                - --upstream=http://127.0.0.1:8080/
+                - --logtostderr=true
+                - --v=10
+                image: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+                name: kube-rbac-proxy
+                ports:
+                - containerPort: 8443
+                  name: https
+                  protocol: TCP
+                resources: {}
+              - args:
+                - --health-probe-bind-address=:8081
+                - --metrics-bind-address=127.0.0.1:8080
+                - --leader-elect
+                command:
+                - /manager
+                image: smartmobilelabs/evo-operator:0.0.71
+                livenessProbe:
+                  httpGet:
+                    path: /healthz
+                    port: 8081
+                  initialDelaySeconds: 15
+                  periodSeconds: 20
+                name: manager
+                readinessProbe:
+                  httpGet:
+                    path: /readyz
+                    port: 8081
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                resources:
+                  limits:
+                    cpu: 200m
+                    memory: 100Mi
+                  requests:
+                    cpu: 100m
+                    memory: 20Mi
+                securityContext:
+                  allowPrivilegeEscalation: false
+              securityContext:
+                runAsNonRoot: true
+              serviceAccountName: sml-evo-controller-manager
+              terminationGracePeriodSeconds: 10
+      permissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - coordination.k8s.io
+          resources:
+          - leases
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+          - patch
+        serviceAccountName: sml-evo-controller-manager
+    strategy: deployment
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: true
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - foo
+  - bar
+  links:
+  - name: Sml Evo
+    url: https://sml-evo.domain
+  maturity: alpha
+  provider:
+    name: sml-evo
+  version: 0.0.71

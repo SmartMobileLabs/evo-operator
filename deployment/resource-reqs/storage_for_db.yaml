@@ -6,7 +6,6 @@ apiVersion: ops.dac.nokia.com/v1alpha1
 kind: Storage
 metadata:
   name: storage-persvol-1
-  namespace: sml-evo
 spec:
   accessModes:
     - ReadWriteOnce

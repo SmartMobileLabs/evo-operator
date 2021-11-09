@@ -6,7 +6,6 @@ apiVersion: ops.dac.nokia.com/v1alpha1
 kind: Resourcerequest
 metadata:
   name: resource-for-sml-evo
-  namespace: sml-evo
 spec:
   requestedResources:
     cpu: 750m
