@@ -6,9 +6,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.1
   creationTimestamp: null
-  name: smlevoes.app.dac.nokia.com.example.com
+  name: smlevoes.app.dac.nokia.com
 spec:
-  group: app.dac.nokia.com.example.com
+  group: app.dac.nokia.com
   names:
     kind: SmlEvo
     listKind: SmlEvoList

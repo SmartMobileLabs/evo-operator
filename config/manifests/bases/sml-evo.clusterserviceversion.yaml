@@ -13,7 +13,7 @@ spec:
     - description: SmlEvo is the Schema for the smlevoes API
       displayName: Sml Evo
       kind: SmlEvo
-      name: smlevos.app.dac.nokia.com.example.com
+      name: smlevos.app.dac.nokia.com
       version: v1alpha1
   description: sml-evo
   displayName: sml-evo

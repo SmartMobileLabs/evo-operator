@@ -5,7 +5,7 @@ metadata:
     alm-examples: |-
       [
         {
-          "apiVersion": "app.dac.nokia.com.example.com/v1alpha1",
+          "apiVersion": "app.dac.nokia.com/v1alpha1",
           "kind": "SmlEvo",
           "metadata": {
             "name": "sml-evo-1"
@@ -32,14 +32,14 @@ metadata:
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.12.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: sml-evo.v0.0.76
+  name: sml-evo.v0.0.83
   namespace: sml-evo-system
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions:
     owned:
     - kind: SmlEvo
-      name: smlevoes.app.dac.nokia.com.example.com
+      name: smlevoes.app.dac.nokia.com
       version: v1alpha1
       description: sml-evo
       displayName: sml-evo
@@ -72,9 +72,21 @@ spec:
           - update
           - watch
         - apiGroups:
-          - app.dac.nokia.com.example.com
+          - app.dac.nokia.com
           resources:
-          - smlevoes
+          - smlevoes/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - app.dac.nokia.com
+          resources:
+          - smlevoes/status
+          verbs:
+          - get
+          - patch
+          - update
+        - apiGroups:
+          - app.dac.nokia.comresources=smlevoes
           verbs:
           - create
           - delete
@@ -83,20 +95,6 @@ spec:
           - patch
           - update
           - watch
-        - apiGroups:
-          - app.dac.nokia.com.example.com
-          resources:
-          - smlevoes/finalizers
-          verbs:
-          - update
-        - apiGroups:
-          - app.dac.nokia.com.example.com
-          resources:
-          - smlevoes/status
-          verbs:
-          - get
-          - patch
-          - update
         - apiGroups:
           - ops.dac.nokia.com
           resources:
@@ -154,7 +152,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: smartmobilelabs/evo-operator:0.0.76
+                image: smartmobilelabs/evo-operator:0.0.83
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -234,4 +232,4 @@ spec:
   maturity: alpha
   provider:
     name: sml-evo
-  version: 0.0.76
+  version: 0.0.83

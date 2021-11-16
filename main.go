@@ -78,7 +78,7 @@ func main() {
 		Port:                   9443,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
-		LeaderElectionID:       "1ef6b27e.example.com",
+		LeaderElectionID:       "1ef6b27e.smartmobilelabs.com",
 		Namespace:              watchNamespace,
 	})
 	if err != nil {

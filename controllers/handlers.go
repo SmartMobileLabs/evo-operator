@@ -208,7 +208,7 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 					namespace,
 					"private-network-for-sml-evo",
 					[]deploymentId{
-						{deploymentTypeStatefulset, "sml-evo-1"},
+						{deploymentTypeStatefulset, "sml-evo"},
 					},
 				)
 				logger.Info("ip address assigned = %s", instance.Status.AppReportedData.PrivateNetworkIpAddress)

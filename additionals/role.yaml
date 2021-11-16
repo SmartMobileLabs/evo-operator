@@ -51,7 +51,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - app.dac.nokia.com.example.com
+  - app.dac.nokia.com
   resources:
   - smlevoes
   verbs:
@@ -63,13 +63,13 @@ rules:
   - update
   - watch
 - apiGroups:
-  - app.dac.nokia.com.example.com
+  - app.dac.nokia.com
   resources:
   - smlevoes/finalizers
   verbs:
   - update
 - apiGroups:
-  - app.dac.nokia.com.example.com
+  - app.dac.nokia.com
   resources:
   - smlevoes/status
   verbs:

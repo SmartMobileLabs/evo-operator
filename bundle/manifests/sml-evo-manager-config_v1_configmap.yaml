@@ -11,7 +11,7 @@ data:
       port: 9443
     leaderElection:
       leaderElect: true
-      resourceName: 1ef6b27e.example.com
+      resourceName: 1ef6b27e.smartmobilelabs.com
 kind: ConfigMap
 metadata:
   name: sml-evo-manager-config
