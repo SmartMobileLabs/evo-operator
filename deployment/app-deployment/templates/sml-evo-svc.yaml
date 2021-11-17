@@ -10,10 +10,14 @@ metadata:
     name: sml-evo
     deleteOnLicenceExpiration: "true"
 spec:
-  type: NodePort
+  clusterIP: None
   ports:
-    - port: {{ .Values.service.uiport }}
+    - name: https
+      port: {{ .Values.service.uiport }}
       targetPort: {{ .Values.service.uiport }}
+    - name: metrics
+      port: 8500
+      targetPort: 8500
   selector:
     app: sml-evo
 

@@ -5,12 +5,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sml-evo-operator-metrics
+  name: sml-evo-service-nodeport
   labels:
     name: sml-evo
     deleteOnLicenceExpiration: "true"
 spec:
-  clusterIP: None
+  type: NodePort
+  ports:
+    - port: {{ .Values.service.uiport }}
+      targetPort: {{ .Values.service.uiport }}
   selector:
     app: sml-evo
 

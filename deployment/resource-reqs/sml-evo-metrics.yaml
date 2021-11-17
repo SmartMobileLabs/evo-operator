@@ -1,0 +1,9 @@
+apiVersion: ops.dac.nokia.com/v1alpha2
+kind: MetricsEndpoint
+metadata:
+  name: sml-evo-metricsendpoint
+spec:
+  prometheus:
+    serviceName: "sml-evo-service"
+    servicePort: "8500"
+    path: "v1/agent/metrics?format=prometheus"

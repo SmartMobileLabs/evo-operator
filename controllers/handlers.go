@@ -198,7 +198,7 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 		func() {
 			logger.Info("Set AppReportedData")
 			//runningCallback - example, some dynamic data should be reported here which has value only after the deployment
-			svc, err := kubelib.GetKubeAPI().CoreV1().Services(namespace).Get(context.TODO(), "sml-evo-operator-metrics", metav1.GetOptions{})
+			svc, err := kubelib.GetKubeAPI().CoreV1().Services(namespace).Get(context.TODO(), "sml-evo-service", metav1.GetOptions{})
 			if err != nil {
 				logger.Error(err, "Failed to read the svc of the metrics endpoint")
 				return
