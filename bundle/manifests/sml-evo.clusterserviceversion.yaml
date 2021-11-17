@@ -32,7 +32,7 @@ metadata:
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.12.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: sml-evo.v0.0.83
+  name: sml-evo.v0.0.85
   namespace: sml-evo-system
 spec:
   apiservicedefinitions: {}
@@ -74,6 +74,18 @@ spec:
         - apiGroups:
           - app.dac.nokia.com
           resources:
+          - smlevoes
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - app.dac.nokia.com
+          resources:
           - smlevoes/finalizers
           verbs:
           - update
@@ -85,16 +97,6 @@ spec:
           - get
           - patch
           - update
-        - apiGroups:
-          - app.dac.nokia.comresources=smlevoes
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
         - apiGroups:
           - ops.dac.nokia.com
           resources:
@@ -152,7 +154,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: smartmobilelabs/evo-operator:0.0.83
+                image: smartmobilelabs/evo-operator:0.0.85
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -232,4 +234,4 @@ spec:
   maturity: alpha
   provider:
     name: sml-evo
-  version: 0.0.83
+  version: 0.0.85

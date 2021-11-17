@@ -1,0 +1,16 @@
+# Copyright 2020 Nokia
+# Licensed under the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sml-evo-operator-metrics
+  labels:
+    name: sml-evo
+    deleteOnLicenceExpiration: "true"
+spec:
+  clusterIP: None
+  selector:
+    app: sml-evo
+

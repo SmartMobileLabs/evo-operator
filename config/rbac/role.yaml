@@ -28,6 +28,18 @@ rules:
 - apiGroups:
   - app.dac.nokia.com
   resources:
+  - smlevoes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - app.dac.nokia.com
+  resources:
   - smlevoes/finalizers
   verbs:
   - update
@@ -39,16 +51,6 @@ rules:
   - get
   - patch
   - update
-- apiGroups:
-  - app.dac.nokia.comresources=smlevoes
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
 - apiGroups:
   - ops.dac.nokia.com
   resources:
