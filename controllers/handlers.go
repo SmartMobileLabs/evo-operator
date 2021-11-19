@@ -190,7 +190,7 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 			},
 		)
 		for k := range instance.Status.AppReportedData.PrivateNetworkIpAddress {
-			logger.Info("ip address assigned = %s", instance.Status.AppReportedData.PrivateNetworkIpAddress[k])
+			logger.Info("ip address assigned " + instance.Status.AppReportedData.PrivateNetworkIpAddress[k])
 		}
 	}
 	//Controls the appStatus and appReportedData in the app spec CR, running continuously in the background
@@ -212,7 +212,9 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 						{deploymentTypeStatefulset, "sml-evo"},
 					},
 				)
-				logger.Info("ip address assigned = %s", instance.Status.AppReportedData.PrivateNetworkIpAddress)
+				for k := range instance.Status.AppReportedData.PrivateNetworkIpAddress {
+					logger.Info("ip address ", "assigned", instance.Status.AppReportedData.PrivateNetworkIpAddress[k])
+				}
 			}
 
 			if err := r.Client.Status().Update(context.TODO(), instance); nil != err {
