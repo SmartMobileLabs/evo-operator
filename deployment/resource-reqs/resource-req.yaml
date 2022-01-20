@@ -9,4 +9,4 @@ metadata:
 spec:
   requestedResources:
     cpu: 750m
-    memory: 384Mi
+    memory: 4Gi

@@ -33,12 +33,12 @@ spec:
             claimName: storage-persvol-1
       containers:
         - name: orchestrator
-          image: smartmobilelabs/evo:117_default
+          image: smartmobilelabs/evo:mtvprod_96_default
           imagePullPolicy: IfNotPresent
           resources:
             limits:
               cpu: 750m
-              memory: 384Mi
+              memory: 4Gi
           ports:
             - containerPort: {{.Values.service.uiport}}
               name: ui-port
