@@ -33,7 +33,7 @@ spec:
             claimName: storage-persvol-1
       containers:
         - name: orchestrator
-          image: smartmobilelabs/evo:mtvprod_96_default
+          image: smartmobilelabs/evo:mtvprod_102_default
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -49,3 +49,9 @@ spec:
           volumeMounts:
             - mountPath: /persvol
               name: evo-persvol
+          env:
+            - name: COMPOSER_BIND_ADDRESS
+              valueFrom:
+                 configMapKeyRef:
+                    name: sml-evo-cm
+                    key: bindAddress
