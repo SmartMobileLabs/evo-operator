@@ -51,7 +51,4 @@ spec:
               name: evo-persvol
           env:
             - name: COMPOSER_BIND_ADDRESS
-              valueFrom:
-                 configMapKeyRef:
-                    name: sml-evo-cm
-                    key: bindAddress
+              value: {{ .Values.service.bindaddress }}

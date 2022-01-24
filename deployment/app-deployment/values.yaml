@@ -12,4 +12,5 @@ service:
   uiport: [[ .Ports.UiPort ]]
   udpportrangelow : [[ .Ports.UdpPortRangeLow ]]
   udpportrangehigh : [[ .Ports.UdpPortRangeLow ]]
+  bindaddress: [[ .PrivateNetworkAccess.AppPodFixIp  ]]
 

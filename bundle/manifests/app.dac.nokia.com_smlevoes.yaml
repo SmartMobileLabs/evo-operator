@@ -55,6 +55,8 @@ spec:
                     type: array
                   apnUUID:
                     type: string
+                  appPodFixIp:
+                    type: string
                   customerNetwork:
                     type: string
                 required:
@@ -134,6 +136,8 @@ spec:
                           type: string
                         type: array
                       apnUUID:
+                        type: string
+                      appPodFixIp:
                         type: string
                       customerNetwork:
                         type: string

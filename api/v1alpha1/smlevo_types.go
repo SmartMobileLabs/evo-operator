@@ -27,6 +27,7 @@ type PrivateNetworkAccess struct {
 	ApnUUID          string   `json:"apnUUID"`
 	CustomerNetwork  string   `json:"customerNetwork"`
 	AdditionalRoutes []string `json:"additionalRoutes,omitempty"`
+	AppPodFixIp      string   `json:"appPodFixIp,omitempty"`
 }
 
 const (

@@ -8,6 +8,10 @@ kind: PrivateNetworkAccess
 metadata:
   name: private-network-for-sml-evo
 spec:
+  [[ if .PrivateNetworkAccess.AppPodFixIp ]]
+  appPodFixIp: 
+    statefulset.apps/sml-evo: [[ .PrivateNetworkAccess.AppPodFixIp ]]
+  [[ end ]]
   customerNetwork: [[ .PrivateNetworkAccess.CustomerNetwork ]]
   apnUUID: [[ .PrivateNetworkAccess.ApnUUID ]]
   additionalRoutes:
