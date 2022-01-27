@@ -10,7 +10,7 @@ metadata:
 spec:
   [[ if .PrivateNetworkAccess.AppPodFixIp ]]
   appPodFixIp: 
-    statefulset.apps/sml-evo: [[ .PrivateNetworkAccess.AppPodFixIp ]]
+    statefulsets.apps/sml-evo: [[ .PrivateNetworkAccess.AppPodFixIp ]]
   [[ end ]]
   customerNetwork: [[ .PrivateNetworkAccess.CustomerNetwork ]]
   apnUUID: [[ .PrivateNetworkAccess.ApnUUID ]]
