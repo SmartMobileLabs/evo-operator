@@ -23,7 +23,7 @@ spec:
         statusCheck: "true"
     spec:
       imagePullSecrets:
-      - name: dacsecret
+      - name: publicapps-pullsecret
       terminationGracePeriodSeconds: 10
       securityContext:
         fsGroup: 1000
@@ -33,7 +33,7 @@ spec:
             claimName: storage-persvol-1
       containers:
         - name: orchestrator
-          image: registry.dac.nokia.com/public_apps/smartmobilelabs/evo:102
+          image: registry.dac.nokia.com/public_apps/smartmobilelabs/evo:master-102
           imagePullPolicy: IfNotPresent
           resources:
             limits:
