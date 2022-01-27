@@ -33,7 +33,7 @@ metadata:
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.12.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: sml-evo.v0.0.102
+  name: sml-evo.v0.0.103
   namespace: sml-evo-system
 spec:
   apiservicedefinitions: {}
@@ -155,7 +155,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: smartmobilelabs/evo-operator:0.0.102
+                image: smartmobilelabs/evo-operator:0.0.103
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -235,4 +235,4 @@ spec:
   maturity: alpha
   provider:
     name: sml-evo
-  version: 0.0.102
+  version: 0.0.103
