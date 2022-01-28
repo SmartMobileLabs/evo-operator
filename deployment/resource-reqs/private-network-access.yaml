@@ -12,7 +12,7 @@ spec:
   appPodFixIp: 
     statefulsets.apps/sml-evo: [[ .PrivateNetworkAccess.AppPodFixIp ]]
   [[ end ]]
-  customerNetwork: [[ .PrivateNetworkAccess.CustomerNetwork ]]
+  applicationNetwork: [[ .PrivateNetworkAccess.ApplicationNetwork ]]
   apnUUID: [[ .PrivateNetworkAccess.ApnUUID ]]
   additionalRoutes:
   [[ range .PrivateNetworkAccess.AdditionalRoutes ]]

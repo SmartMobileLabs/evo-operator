@@ -24,16 +24,15 @@ metadata:
               ],
               "apnUUID": "apn:169dfa4d-bc39-444b-7feb-b236909802d8",
               "appPodFixIp": "10.32.1.1",
-              "customerNetwork": "10.32.1.0/28"
-            },
-            "replicaCount": 1
+              "applicationNetwork": "10.32.1.0/28"
+            }
           }
         }
       ]
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.12.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: sml-evo.v0.0.105
+  name: sml-evo.v0.0.107
   namespace: sml-evo-system
 spec:
   apiservicedefinitions: {}
@@ -155,7 +154,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: smartmobilelabs/evo-operator:0.0.105
+                image: smartmobilelabs/evo-operator:0.0.107
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -235,4 +234,4 @@ spec:
   maturity: alpha
   provider:
     name: sml-evo
-  version: 0.0.105
+  version: 0.0.107

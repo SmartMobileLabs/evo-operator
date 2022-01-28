@@ -24,10 +24,14 @@ import (
 type AppStatus string
 
 type PrivateNetworkAccess struct {
-	ApnUUID          string   `json:"apnUUID"`
-	CustomerNetwork  string   `json:"customerNetwork"`
+	// the ID of this application
+	ApnUUID string `json:"apnUUID"`
+	// the network on which this application will run
+	ApplicationNetwork string `json:"applicationNetwork"`
+	// additional needed IP routes
 	AdditionalRoutes []string `json:"additionalRoutes,omitempty"`
-	AppPodFixIp      string   `json:"appPodFixIp,omitempty"`
+	// the IP address under which the EVO will be reachable. If set, it will ONLY be reachable under this address
+	AppPodFixIp string `json:"appPodFixIp,omitempty"`
 }
 
 const (
@@ -38,7 +42,7 @@ const (
 )
 
 type AppReporteData struct {
-	//The structure of this type is up the application. AppFw will convert the whole representation to JSON.
+	// metrics information
 	MetricsClusterIp string `json:"metricsClusterIp,omitempty"`
 	//Ip addresses of the services that received IP address from the private network
 	PrivateNetworkIpAddress map[string]string `json:"privateNetworkIpAddresses,omitempty"`
@@ -58,18 +62,20 @@ type SmlEvoStatus struct {
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 type EvoPorts struct {
-	UiPort           int `json:"uiPort,omitempty"`
-	UdpPortRangeLow  int `json:"udpPortLow,omitempty"`
+	// the tcp/ip port for the application to listen on for https REST and GUI
+	UiPort int `json:"uiPort,omitempty"`
+	// the lowest UDP port of the range of UDP ports to listen to for ports that are to be seen in the outside of the application
+	UdpPortRangeLow int `json:"udpPortLow,omitempty"`
+	// the highest UDP port of the range of UDP ports to listen to for ports that are to be seen in the outside of the application
 	UdpPortRangeHigh int `json:"udpPortHigh,omitempty"`
 }
 
 type SmlEvoSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
-	ReplicaCount         int                   `json:"replicaCount"`
-	Ports                EvoPorts              `json:"ports"`
-	MetricsDomainName    string                `json:"metricsDomainName,omitempty"`
+	// ports to be used for the application
+	Ports EvoPorts `json:"ports"`
+	// the domain name for the metrics to report to
+	MetricsDomainName string `json:"metricsDomainName,omitempty"`
+	// information about into which network the application is to be placed
 	PrivateNetworkAccess *PrivateNetworkAccess `json:"privateNetworkAccess,omitempty"`
 }
 

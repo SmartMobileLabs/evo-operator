@@ -36,44 +36,51 @@ spec:
           spec:
             properties:
               metricsDomainName:
+                description: the domain name for the metrics to report to
                 type: string
               ports:
-                description: 'EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-                  NOTE: json tags are required.  Any new fields you add must have
-                  json tags for the fields to be serialized.'
+                description: ports to be used for the application
                 properties:
                   udpPortHigh:
+                    description: the highest UDP port of the range of UDP ports to
+                      listen to for ports that are to be seen in the outside of the
+                      application
                     type: integer
                   udpPortLow:
+                    description: the lowest UDP port of the range of UDP ports to
+                      listen to for ports that are to be seen in the outside of the
+                      application
                     type: integer
                   uiPort:
+                    description: the tcp/ip port for the application to listen on
+                      for https REST and GUI
                     type: integer
                 type: object
               privateNetworkAccess:
+                description: information about into which network the application
+                  is to be placed
                 properties:
                   additionalRoutes:
+                    description: additional needed IP routes
                     items:
                       type: string
                     type: array
                   apnUUID:
+                    description: the ID of this application
                     type: string
                   appPodFixIp:
+                    description: the IP address under which the EVO will be reachable.
+                      If set, it will ONLY be reachable under this address
                     type: string
-                  customerNetwork:
+                  applicationNetwork:
+                    description: the network on which this application will run
                     type: string
                 required:
                 - apnUUID
-                - customerNetwork
+                - applicationNetwork
                 type: object
-              replicaCount:
-                description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-                  Important: Run "operator-sdk generate k8s" to regenerate code after
-                  modifying this file Add custom validation using kubebuilder tags:
-                  https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html'
-                type: integer
             required:
             - ports
-            - replicaCount
             type: object
           status:
             description: SmlEvoStatus defines the observed state of SmlEvo
@@ -81,8 +88,7 @@ spec:
               appReportedData:
                 properties:
                   metricsClusterIp:
-                    description: The structure of this type is up the application.
-                      AppFw will convert the whole representation to JSON.
+                    description: metrics information
                     type: string
                   privateNetworkIpAddresses:
                     additionalProperties:
@@ -118,44 +124,51 @@ spec:
                   tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html'
                 properties:
                   metricsDomainName:
+                    description: the domain name for the metrics to report to
                     type: string
                   ports:
-                    description: 'EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO
-                      OWN! NOTE: json tags are required.  Any new fields you add must
-                      have json tags for the fields to be serialized.'
+                    description: ports to be used for the application
                     properties:
                       udpPortHigh:
+                        description: the highest UDP port of the range of UDP ports
+                          to listen to for ports that are to be seen in the outside
+                          of the application
                         type: integer
                       udpPortLow:
+                        description: the lowest UDP port of the range of UDP ports
+                          to listen to for ports that are to be seen in the outside
+                          of the application
                         type: integer
                       uiPort:
+                        description: the tcp/ip port for the application to listen
+                          on for https REST and GUI
                         type: integer
                     type: object
                   privateNetworkAccess:
+                    description: information about into which network the application
+                      is to be placed
                     properties:
                       additionalRoutes:
+                        description: additional needed IP routes
                         items:
                           type: string
                         type: array
                       apnUUID:
+                        description: the ID of this application
                         type: string
                       appPodFixIp:
+                        description: the IP address under which the EVO will be reachable.
+                          If set, it will ONLY be reachable under this address
                         type: string
-                      customerNetwork:
+                      applicationNetwork:
+                        description: the network on which this application will run
                         type: string
                     required:
                     - apnUUID
-                    - customerNetwork
+                    - applicationNetwork
                     type: object
-                  replicaCount:
-                    description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of
-                      cluster Important: Run "operator-sdk generate k8s" to regenerate
-                      code after modifying this file Add custom validation using kubebuilder
-                      tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html'
-                    type: integer
                 required:
                 - ports
-                - replicaCount
                 type: object
             type: object
         type: object
