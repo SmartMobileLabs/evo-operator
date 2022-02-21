@@ -13,4 +13,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: smartmobilelabs/evo-operator
-  newTag: 0.0.108
+  newTag: 0.0.109

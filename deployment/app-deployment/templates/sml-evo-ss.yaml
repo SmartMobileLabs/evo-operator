@@ -32,7 +32,7 @@ spec:
             claimName: storage-persvol-1
       containers:
         - name: orchestrator
-          image: registry.dac.nokia.com/public_apps/smartmobilelabs/evo:master-102
+          image: registry.dac.nokia.com/public_apps/smartmobilelabs/evo:master-103
           imagePullPolicy: IfNotPresent
           resources:
             limits:
