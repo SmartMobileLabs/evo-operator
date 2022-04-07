@@ -36,7 +36,7 @@ type SmlEvoReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=ops.dac.nokia.com,resources=licenceexpireds,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=ops.dac.nokia.com,resources=licenceexpireds;hostconfigs,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=app.dac.nokia.com,resources=smlevoes,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=app.dac.nokia.com,resources=smlevoes/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=app.dac.nokia.com,resources=smlevoes/finalizers,verbs=update

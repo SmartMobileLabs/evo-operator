@@ -1,0 +1,7 @@
+---
+apiVersion: ops.dac.nokia.com/v1alpha1
+kind: HostConfig
+metadata:
+  name: smlevo-hostplatform-update
+spec:
+  type: KernelParamChangeUDPBufferIncrease

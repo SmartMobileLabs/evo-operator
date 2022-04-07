@@ -33,6 +33,19 @@ spec:
             type: object
           spec:
             properties:
+              domain:
+                description: Domain Name Information
+                properties:
+                  name:
+                    description: the DNS that will be requested for this instance
+                    type: string
+                  networkId:
+                    description: the network ID
+                    type: string
+                required:
+                - name
+                - networkId
+                type: object
               metricsDomainName:
                 description: the domain name for the metrics to report to
                 type: string
@@ -121,6 +134,19 @@ spec:
                   code after modifying this file Add custom validation using kubebuilder
                   tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html'
                 properties:
+                  domain:
+                    description: Domain Name Information
+                    properties:
+                      name:
+                        description: the DNS that will be requested for this instance
+                        type: string
+                      networkId:
+                        description: the network ID
+                        type: string
+                    required:
+                    - name
+                    - networkId
+                    type: object
                   metricsDomainName:
                     description: the domain name for the metrics to report to
                     type: string

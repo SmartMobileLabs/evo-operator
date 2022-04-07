@@ -12,4 +12,8 @@ service:
   udpportrangelow : [[ .Ports.UdpPortRangeLow ]]
   udpportrangehigh : [[ .Ports.UdpPortRangeLow ]]
   bindaddress: [[ .PrivateNetworkAccess.AppPodFixIp  ]]
+  domain:
+    name: [[ .Domain.Name ]]
+    networkId: [[ .Domain.NetworkId ]]
+
 

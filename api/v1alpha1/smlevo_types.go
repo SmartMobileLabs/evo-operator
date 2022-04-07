@@ -34,6 +34,13 @@ type PrivateNetworkAccess struct {
 	AppPodFixIp string `json:"appPodFixIp,omitempty"`
 }
 
+type EvoDomainInfo struct {
+	// the DNS that will be requested for this instance
+	Name string `json:"name"`
+	// the network ID
+	NetworkId string `json:"networkId"`
+}
+
 const (
 	AppStatusNotSet     = "UNSET"
 	AppStatusNotRunning = "NOT_RUNNING"
@@ -77,6 +84,8 @@ type SmlEvoSpec struct {
 	MetricsDomainName string `json:"metricsDomainName,omitempty"`
 	// information about into which network the application is to be placed
 	PrivateNetworkAccess *PrivateNetworkAccess `json:"privateNetworkAccess,omitempty"`
+	// Domain Name Information
+	Domain EvoDomainInfo `json:"domain,omitempty"`
 }
 
 //+kubebuilder:object:root=true

@@ -1,0 +1,13 @@
+---
+apiVersion: dnsentry.dac.nokia.com/v1alpha1
+kind: DnsEntry
+metadata:
+  name: smlevo-dnsentry
+spec:
+  domainName: {{ .Values.domain.name }}
+  deploymentName: sml-evo
+  deploymentType: statefulsets
+  {{- if .Values.domain.networkId }}
+  apn: {{ .Values.domain.networkId }}
+  {{- end }}
+
