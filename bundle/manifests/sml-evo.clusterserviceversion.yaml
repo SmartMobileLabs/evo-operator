@@ -36,7 +36,7 @@ metadata:
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.12.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: sml-evo.v0.0.117
+  name: sml-evo.v0.0.118
   namespace: sml-evo-system
 spec:
   apiservicedefinitions: {}
@@ -56,63 +56,6 @@ spec:
     spec:
       clusterPermissions:
       - rules:
-        - apiGroups:
-          - ""
-          - apps
-          resources:
-          - configmaps
-          - endpoints
-          - persistentvolumeclaims
-          - pods
-          - secrets
-          - services
-          - statefulsets
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - app.dac.nokia.com
-          resources:
-          - smlevoes
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
-        - apiGroups:
-          - app.dac.nokia.com
-          resources:
-          - smlevoes/finalizers
-          verbs:
-          - update
-        - apiGroups:
-          - app.dac.nokia.com
-          resources:
-          - smlevoes/status
-          verbs:
-          - get
-          - patch
-          - update
-        - apiGroups:
-          - ops.dac.nokia.com
-          resources:
-          - licenceexpireds
-          verbs:
-          - create
-          - delete
-          - get
-          - list
-          - patch
-          - update
-          - watch
         - apiGroups:
           - authentication.k8s.io
           resources:
@@ -158,7 +101,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: smartmobilelabs/evo-operator:0.0.117
+                image: smartmobilelabs/evo-operator:0.0.118
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -238,4 +181,4 @@ spec:
   maturity: alpha
   provider:
     name: sml-evo
-  version: 0.0.117
+  version: 0.0.118

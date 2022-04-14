@@ -12,8 +12,10 @@ service:
   udpportrangelow : [[ .Ports.UdpPortRangeLow ]]
   udpportrangehigh : [[ .Ports.UdpPortRangeLow ]]
   bindaddress: [[ .PrivateNetworkAccess.AppPodFixIp  ]]
-  domain:
-    name: [[ .Domain.Name ]]
-    networkId: [[ .Domain.NetworkId ]]
-
-
+[[- if and (.Domain) (ne .Domain.Name "") ]]
+domain:
+  name: [[ .Domain.Name ]]
+  [[- if and (.Domain.NetworkId) (ne .Domain.NetworkId "") ]]
+  networkId: [[ .Domain.NetworkId ]]
+  [[- end ]]
+[[- end ]]

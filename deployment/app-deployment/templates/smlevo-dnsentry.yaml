@@ -1,3 +1,4 @@
+{{- if .Values.domain }}
 ---
 apiVersion: dnsentry.dac.nokia.com/v1alpha1
 kind: DnsEntry
@@ -10,4 +11,4 @@ spec:
   {{- if .Values.domain.networkId }}
   apn: {{ .Values.domain.networkId }}
   {{- end }}
-
+{{- end }}

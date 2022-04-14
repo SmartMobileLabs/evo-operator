@@ -1,10 +1,11 @@
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   creationTimestamp: null
   name: manager-role
+  namespace: app-ns-placeholder
 rules:
 - apiGroups:
   - ""
@@ -52,8 +53,15 @@ rules:
   - patch
   - update
 - apiGroups:
+  - dnsentry.dac.nokia.com
+  resources:
+  - dnsentries
+  verbs:
+  - '*'
+- apiGroups:
   - ops.dac.nokia.com
   resources:
+  - hostconfigs
   - licenceexpireds
   verbs:
   - create

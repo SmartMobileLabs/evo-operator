@@ -36,11 +36,12 @@ type SmlEvoReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=ops.dac.nokia.com,resources=licenceexpireds;hostconfigs,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=app.dac.nokia.com,resources=smlevoes,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=app.dac.nokia.com,resources=smlevoes/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=app.dac.nokia.com,resources=smlevoes/finalizers,verbs=update
-//+kubebuilder:rbac:groups="";apps,resources=secrets;configmaps;statefulsets;pods;services;endpoints;persistentvolumeclaims,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=ops.dac.nokia.com,namespace=app-ns-placeholder,resources=licenceexpireds;hostconfigs,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=dnsentry.dac.nokia.com,namespace=app-ns-placeholder,resources=dnsentries,verbs=*
+//+kubebuilder:rbac:groups=app.dac.nokia.com,namespace=app-ns-placeholder,resources=smlevoes,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=app.dac.nokia.com,namespace=app-ns-placeholder,resources=smlevoes/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=app.dac.nokia.com,namespace=app-ns-placeholder,resources=smlevoes/finalizers,verbs=update
+//+kubebuilder:rbac:groups="";apps,namespace=app-ns-placeholder,resources=secrets;configmaps;statefulsets;pods;services;endpoints;persistentvolumeclaims,verbs=get;list;watch;create;update;patch;delete
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

@@ -38,7 +38,7 @@ type EvoDomainInfo struct {
 	// the DNS that will be requested for this instance
 	Name string `json:"name"`
 	// the network ID
-	NetworkId string `json:"networkId"`
+	NetworkId string `json:"networkId,omitempty"`
 }
 
 const (

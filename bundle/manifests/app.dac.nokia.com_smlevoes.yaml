@@ -44,7 +44,6 @@ spec:
                     type: string
                 required:
                 - name
-                - networkId
                 type: object
               metricsDomainName:
                 description: the domain name for the metrics to report to
@@ -145,7 +144,6 @@ spec:
                         type: string
                     required:
                     - name
-                    - networkId
                     type: object
                   metricsDomainName:
                     description: the domain name for the metrics to report to
