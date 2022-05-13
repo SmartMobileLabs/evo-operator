@@ -6,12 +6,19 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-metricsDomainName: [[ .MetricsDomainName ]]
 service:
-  uiport: [[ .Ports.UiPort ]]
-  udpportrangelow : [[ .Ports.UdpPortRangeLow ]]
-  udpportrangehigh : [[ .Ports.UdpPortRangeLow ]]
-  bindaddress: [[ .PrivateNetworkAccess.AppPodFixIp  ]]
+  [[- if .Ports ]]
+  uiport: [[ or .Ports.UiPort 9000 ]]
+  udpportrangelow : [[ or .Ports.UdpPortRangeLow 15000 ]]
+  udpportrangehigh : [[ or .Ports.UdpPortRangeHigh 49000 ]]
+  [[- else ]]
+  uiport: 9000
+  udpportrangelow : 15000
+  udpportrangehigh : 49000
+  [[- end ]]
+  [[- if and (.PrivateNetworkAccess) (ne .PrivateNetworkAccess.AppPodFixIp "") ]]
+  bindaddress: [[ .PrivateNetworkAccess.AppPodFixIp ]]
+  [[- end ]]
 [[- if and (.Domain) (ne .Domain.Name "") ]]
 domain:
   name: [[ .Domain.Name ]]
