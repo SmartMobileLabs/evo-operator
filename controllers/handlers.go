@@ -7,12 +7,13 @@ package controllers
 import (
 	"context"
 	"encoding/json"
-	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
-	"k8s.io/apimachinery/pkg/runtime/schema"
-	"k8s.io/client-go/dynamic"
 	"reflect"
 	"regexp"
 	"time"
+
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
+	"k8s.io/apimachinery/pkg/runtime/schema"
+	"k8s.io/client-go/dynamic"
 
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	app "smartmobilelabs.com/evo/evo-operator/api/v1alpha1"
@@ -198,12 +199,7 @@ func (r *SmlEvoReconciler) handleCreate(instance *app.SmlEvo, namespace string) 
 		func() {
 			logger.Info("Set AppReportedData")
 			//runningCallback - example, some dynamic data should be reported here which has value only after the deployment
-			svc, err := kubelib.GetKubeAPI().CoreV1().Services(namespace).Get(context.TODO(), "sml-evo-service", metav1.GetOptions{})
-			if err != nil {
-				logger.Error(err, "Failed to read the svc of the metrics endpoint")
-				return
-			}
-			instance.Status.AppReportedData.MetricsClusterIp = svc.Spec.ClusterIP
+
 			if instance.Spec.PrivateNetworkAccess != nil {
 				instance.Status.AppReportedData.PrivateNetworkIpAddress = getPrivateNetworkIpAddresses(
 					namespace,

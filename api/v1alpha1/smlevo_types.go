@@ -23,15 +23,20 @@ import (
 
 type AppStatus string
 
-type PrivateNetworkAccess struct {
-	// the ID of this application
+type Network struct {
+	// APN ID
 	ApnUUID string `json:"apnUUID"`
+	// IP network routes where the application should be accessible
+	AdditionalRoutes []string `json:"additionalRoutes,omitempty"`
+}
+
+type PrivateNetworkAccess struct {
 	// the network on which this application will run
 	ApplicationNetwork string `json:"applicationNetwork"`
-	// additional needed IP routes
-	AdditionalRoutes []string `json:"additionalRoutes,omitempty"`
 	// the IP address under which the EVO will be reachable. If set, it will ONLY be reachable under this address
 	AppPodFixIp string `json:"appPodFixIp,omitempty"`
+	// APN details where the application will be connected to
+	Networks []Network `json:"networks,omitempty"`
 }
 
 type EvoDomainInfo struct {
@@ -48,9 +53,7 @@ const (
 	AppStatusFrozen     = "FROZEN"
 )
 
-type AppReporteData struct {
-	// metrics information
-	MetricsClusterIp string `json:"metricsClusterIp,omitempty"`
+type AppReportedData struct {
 	//Ip addresses of the services that received IP address from the private network
 	PrivateNetworkIpAddress map[string]string `json:"privateNetworkIpAddresses,omitempty"`
 }
@@ -62,27 +65,37 @@ type SmlEvoStatus struct {
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
 	PrevSpec         *SmlEvoSpec                     `json:"prevSpec,omitempty"`
 	AppStatus        AppStatus                       `json:"appStatus,omitempty"`
-	AppReportedData  AppReporteData                  `json:"appReportedData,omitempty"`
+	AppReportedData  AppReportedData                 `json:"appReportedData,omitempty"`
 	AppliedResources []k8sdynamic.ResourceDescriptor `json:"appliedResources,omitempty"`
 }
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 type EvoPorts struct {
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=65535
+	// +kubebuilder:validation:ExclusiveMinimum=false
+	// +kubebuilder:validation:ExclusiveMaximum=false
 	// the tcp/ip port for the application to listen on for https REST and GUI
 	UiPort int `json:"uiPort,omitempty"`
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=65535
+	// +kubebuilder:validation:ExclusiveMinimum=false
+	// +kubebuilder:validation:ExclusiveMaximum=false
 	// the lowest UDP port of the range of UDP ports to listen to for ports that are to be seen in the outside of the application
 	UdpPortRangeLow int `json:"udpPortLow,omitempty"`
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=65535
+	// +kubebuilder:validation:ExclusiveMinimum=false
+	// +kubebuilder:validation:ExclusiveMaximum=false
 	// the highest UDP port of the range of UDP ports to listen to for ports that are to be seen in the outside of the application
 	UdpPortRangeHigh int `json:"udpPortHigh,omitempty"`
 }
 
 type SmlEvoSpec struct {
 	// ports to be used for the application
-	Ports EvoPorts `json:"ports"`
-	// the domain name for the metrics to report to
-	MetricsDomainName string `json:"metricsDomainName,omitempty"`
-	// information about into which network the application is to be placed
+	Ports *EvoPorts `json:"ports,omitempty"`
+	// information about into which network/s the application is to be connected
 	PrivateNetworkAccess *PrivateNetworkAccess `json:"privateNetworkAccess,omitempty"`
 	// Domain Name Information
 	Domain EvoDomainInfo `json:"domain,omitempty"`
