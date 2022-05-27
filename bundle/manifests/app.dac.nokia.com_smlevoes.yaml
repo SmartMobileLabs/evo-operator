@@ -45,9 +45,6 @@ spec:
                 required:
                 - name
                 type: object
-              metricsDomainName:
-                description: the domain name for the metrics to report to
-                type: string
               ports:
                 description: ports to be used for the application
                 properties:
@@ -55,29 +52,27 @@ spec:
                     description: the highest UDP port of the range of UDP ports to
                       listen to for ports that are to be seen in the outside of the
                       application
+                    maximum: 65535
+                    minimum: 1
                     type: integer
                   udpPortLow:
                     description: the lowest UDP port of the range of UDP ports to
                       listen to for ports that are to be seen in the outside of the
                       application
+                    maximum: 65535
+                    minimum: 1
                     type: integer
                   uiPort:
                     description: the tcp/ip port for the application to listen on
                       for https REST and GUI
+                    maximum: 65535
+                    minimum: 1
                     type: integer
                 type: object
               privateNetworkAccess:
-                description: information about into which network the application
-                  is to be placed
+                description: information about into which network/s the application
+                  is to be connected
                 properties:
-                  additionalRoutes:
-                    description: additional needed IP routes
-                    items:
-                      type: string
-                    type: array
-                  apnUUID:
-                    description: the ID of this application
-                    type: string
                   appPodFixIp:
                     description: the IP address under which the EVO will be reachable.
                       If set, it will ONLY be reachable under this address
@@ -85,21 +80,33 @@ spec:
                   applicationNetwork:
                     description: the network on which this application will run
                     type: string
+                  networks:
+                    description: APN details where the application will be connected
+                      to
+                    items:
+                      properties:
+                        additionalRoutes:
+                          description: IP network routes where the application should
+                            be accessible
+                          items:
+                            type: string
+                          type: array
+                        apnUUID:
+                          description: APN ID
+                          type: string
+                      required:
+                      - apnUUID
+                      type: object
+                    type: array
                 required:
-                - apnUUID
                 - applicationNetwork
                 type: object
-            required:
-            - ports
             type: object
           status:
             description: SmlEvoStatus defines the observed state of SmlEvo
             properties:
               appReportedData:
                 properties:
-                  metricsClusterIp:
-                    description: metrics information
-                    type: string
                   privateNetworkIpAddresses:
                     additionalProperties:
                       type: string
@@ -145,9 +152,6 @@ spec:
                     required:
                     - name
                     type: object
-                  metricsDomainName:
-                    description: the domain name for the metrics to report to
-                    type: string
                   ports:
                     description: ports to be used for the application
                     properties:
@@ -155,29 +159,27 @@ spec:
                         description: the highest UDP port of the range of UDP ports
                           to listen to for ports that are to be seen in the outside
                           of the application
+                        maximum: 65535
+                        minimum: 1
                         type: integer
                       udpPortLow:
                         description: the lowest UDP port of the range of UDP ports
                           to listen to for ports that are to be seen in the outside
                           of the application
+                        maximum: 65535
+                        minimum: 1
                         type: integer
                       uiPort:
                         description: the tcp/ip port for the application to listen
                           on for https REST and GUI
+                        maximum: 65535
+                        minimum: 1
                         type: integer
                     type: object
                   privateNetworkAccess:
-                    description: information about into which network the application
-                      is to be placed
+                    description: information about into which network/s the application
+                      is to be connected
                     properties:
-                      additionalRoutes:
-                        description: additional needed IP routes
-                        items:
-                          type: string
-                        type: array
-                      apnUUID:
-                        description: the ID of this application
-                        type: string
                       appPodFixIp:
                         description: the IP address under which the EVO will be reachable.
                           If set, it will ONLY be reachable under this address
@@ -185,12 +187,27 @@ spec:
                       applicationNetwork:
                         description: the network on which this application will run
                         type: string
+                      networks:
+                        description: APN details where the application will be connected
+                          to
+                        items:
+                          properties:
+                            additionalRoutes:
+                              description: IP network routes where the application
+                                should be accessible
+                              items:
+                                type: string
+                              type: array
+                            apnUUID:
+                              description: APN ID
+                              type: string
+                          required:
+                          - apnUUID
+                          type: object
+                        type: array
                     required:
-                    - apnUUID
                     - applicationNetwork
                     type: object
-                required:
-                - ports
                 type: object
             type: object
         type: object

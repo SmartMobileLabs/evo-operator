@@ -15,18 +15,12 @@ metadata:
               "name": "foo1",
               "networkId": "foo123"
             },
-            "metricsDomainName": "sml-evo.192.168.50.10.nip.io",
             "ports": {
               "udpPortHigh": 11000,
               "udpPortLow": 10000,
               "uiPort": 9000
             },
             "privateNetworkAccess": {
-              "additionalRoutes": [
-                "10.30.1.0/28",
-                "10.40.1.0/28"
-              ],
-              "apnUUID": "apn:169dfa4d-bc39-444b-7feb-b236909802d8",
               "appPodFixIp": "10.32.1.1",
               "applicationNetwork": "10.32.1.0/28"
             }
@@ -34,9 +28,9 @@ metadata:
         }
       ]
     capabilities: Basic Install
-    operators.operatorframework.io/builder: operator-sdk-v1.12.0
+    operators.operatorframework.io/builder: operator-sdk-v1.11.0+git
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
-  name: sml-evo.v0.0.119
+  name: sml-evo.v0.0.121
   namespace: sml-evo-system
 spec:
   apiservicedefinitions: {}
@@ -45,8 +39,6 @@ spec:
     - kind: SmlEvo
       name: smlevoes.app.dac.nokia.com
       version: v1alpha1
-      description: sml-evo
-      displayName: sml-evo
   description: sml-evo
   displayName: sml-evo
   icon:
@@ -101,7 +93,7 @@ spec:
                 - --leader-elect
                 command:
                 - /manager
-                image: smartmobilelabs/evo-operator:0.0.119
+                image: smartmobilelabs/evo-operator:0.0.121
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -181,4 +173,4 @@ spec:
   maturity: alpha
   provider:
     name: sml-evo
-  version: 0.0.119
+  version: 0.0.121

@@ -9,12 +9,13 @@ spec:
     udpPortLow: 10000
     uiPort: 9000
   privateNetworkAccess:
-    applicationNetwork: 10.32.1.0/28
-    apnUUID: apn:169dfa4d-bc39-444b-7feb-b236909802d8
-    additionalRoutes:
-    - 10.30.1.0/28
-    - 10.40.1.0/28
     appPodFixIp: 10.32.1.1
+    applicationNetwork: 10.32.1.0/28
+    networks:
+    - apnUUID: apn:169dfa4d-bc39-444b-7feb-b236909802d8
+      additionalRoutes:
+      - 10.30.1.0/28
+      - 10.40.1.0/28
   domain:
     name: foo1
     networkId: foo123
