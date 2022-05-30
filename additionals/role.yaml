@@ -51,6 +51,12 @@ rules:
   - update
   - watch
 - apiGroups:
+  - dnsentry.dac.nokia.com
+  resources:
+  - dnsentries
+  verbs:
+  - '*'
+- apiGroups:
   - app.dac.nokia.com
   resources:
   - smlevoes
